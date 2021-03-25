@@ -16,13 +16,13 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+      expect(appController.getHello()).toBe('Hello World');
     });
   });
  
   describe('test', () => {
     it('should return "Game eiei"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+      expect(appController.getTest()).toBe('Game eiei');
     });
   });
 });
