@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository } from 'typeorm';
+import { Injectable, Module } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
+import { Connection, DeleteResult, Repository } from 'typeorm';
 import { Movie } from './movie.entity';
 
 @Injectable()
@@ -14,7 +15,7 @@ export class MovieService {
     return await this.movieRepository.save(movie);
   }
 
-  async findOne(id: number): Promise<Movie> {
+  async findOneById(id: number): Promise<Movie> {
     var movie = await this.movieRepository.findOne({ id: id });
     if (movie != null) {
       return movie

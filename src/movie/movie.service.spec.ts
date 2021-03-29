@@ -1,4 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from 'node:module';
+import { AppModule } from '../app.module';
+import { Movie } from './movie.entity';
+import { MovieModule } from './movie.module';
 import { MovieService } from './movie.service';
 
 describe('MovieService', () => {
@@ -6,6 +11,7 @@ describe('MovieService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [MovieModule, AppModule],
       providers: [MovieService],
     }).compile();
 
