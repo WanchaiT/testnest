@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpException, HttpStatus, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { CreateMovieDto } from './movie.create-movie.dto';
 import { Movie } from './movie.entity';
 import { MovieService } from './movie.service';
@@ -22,16 +22,33 @@ export class MovieController {
         return await this.movieService.findAll()
     }
 
+    @Get("find") // Get /movies/name
+    async findMobvieByName(@Query('name') name: string): Promise<Movie> {
+        var resultMovie = await this.movieService.findOneByName(name)
+        if (resultMovie == null) {
+            throw new HttpException(`No content name ${name} database`, HttpStatus.NOT_FOUND);
+        } else {
+            return resultMovie
+        }
+    }
+
     @Get(':id') // Get /movies/11
-    async findMobvie(@Param('id') id: number): Promise<Movie> {
-        return await this.movieService.findOne(id)
+    async findMobvie(
+        @Param('id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: number
+    ) : Promise<Movie> {
+        var resultMovie = await this.movieService.findOne(id)
+        if (resultMovie == null) {
+            throw new HttpException(`No content id ${id} database`, HttpStatus.NOT_FOUND);
+        } else {
+            return resultMovie
+        }
     }
 
     @Put(':id') // Put /movies/11
     async updateMovie(
         @Param('id') id: number, 
         @Body() createMovieDto: CreateMovieDto,
-    ): Promise<Movie> {
+    ) : Promise<Movie> {
         const movie = await this.movieService.findOne(id)
         movie.name = createMovieDto.name
         movie.score = createMovieDto.score

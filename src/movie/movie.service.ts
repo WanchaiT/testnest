@@ -15,7 +15,21 @@ export class MovieService {
   }
 
   async findOne(id: number): Promise<Movie> {
-    return await this.movieRepository.findOne({ id: id });
+    var movie = await this.movieRepository.findOne({ id: id });
+    if (movie != null) {
+      return movie
+    } else {
+      return null
+    }
+  }
+
+  async findOneByName(name: string): Promise<Movie> {
+    var movie = await this.movieRepository.findOne({ name: name });
+    if (movie != null) {
+      return movie
+    } else {
+      return null
+    }
   }
 
   async findAll(): Promise<Movie[]> {
