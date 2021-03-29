@@ -1,5 +1,4 @@
 import { Injectable, Module } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
 import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
 import { Connection, DeleteResult, Repository } from 'typeorm';
 import { Movie } from './movie.entity';

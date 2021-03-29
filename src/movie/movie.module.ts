@@ -1,6 +1,5 @@
 import { HttpModule, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { SequelizeModule } from '@nestjs/sequelize';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { type } from 'node:os';
 import { Repository } from 'typeorm';
