@@ -1,4 +1,4 @@
-import { Injectable, Module } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Module } from '@nestjs/common';
 import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
 import { Connection, DeleteResult, Repository } from 'typeorm';
 import { Movie } from './movie.entity';

@@ -25,6 +25,13 @@ export class MovieController {
 
     @Get("find") // Get /movies/name
     async findMovieByName(@Query('name') name: string): Promise<Movie> {
+        // try {
+        //     var resultMovie = await this.movieService.findOneByName(name)
+        //     return resultMovie
+        // } catch(e) {
+        //     return e
+        // }
+
         var resultMovie = await this.movieService.findOneByName(name)
         if (resultMovie == null) {
             throw new HttpException(`No content name ${name} database`, HttpStatus.NOT_FOUND);
