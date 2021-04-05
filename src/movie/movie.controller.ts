@@ -6,7 +6,7 @@ import { MovieService } from './movie.service';
 
 @Controller('movies')
 export class MovieController {
-    constructor(private readonly movieService: MovieService) {}
+    constructor(private readonly movieService: MovieService) { }
 
     @Post() // Post /movies
     @HttpCode(HttpStatus.CREATED)
@@ -25,38 +25,23 @@ export class MovieController {
 
     @Get("find") // Get /movies/name
     async findMovieByName(@Query('name') name: string): Promise<Movie> {
-        // try {
-        //     var resultMovie = await this.movieService.findOneByName(name)
-        //     return resultMovie
-        // } catch(e) {
-        //     return e
-        // }
-
         var resultMovie = await this.movieService.findOneByName(name)
-        if (resultMovie == null) {
-            throw new HttpException(`No content name ${name} database`, HttpStatus.NOT_FOUND);
-        } else {
-            return resultMovie
-        }
+        return resultMovie
     }
 
     @Get(':id') // Get /movies/11
     async findMovieById(
         @Param('id', new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE })) id: number
-    ) : Promise<Movie> {
+    ): Promise<Movie> {
         var resultMovie = await this.movieService.findOneById(id)
-        if (resultMovie == null) {
-            throw new HttpException(`No content id ${id} database`, HttpStatus.NOT_FOUND);
-        } else {
-            return resultMovie
-        }
+        return resultMovie
     }
 
     @Put(':id') // Put /movies/11
     async updateMovie(
-        @Param('id') id: number, 
+        @Param('id') id: number,
         @Body() createMovieDto: CreateMovieDto,
-    ) : Promise<Movie> {
+    ): Promise<Movie> {
         const movie = await this.movieService.findOneById(id)
         movie.name = createMovieDto.name
         movie.score = createMovieDto.score
@@ -64,9 +49,9 @@ export class MovieController {
         return await this.movieService.createOrUpdate(movie)
     }
 
-    @Delete(':id')
+    @Delete(':id') // Delete /movies/11
     async deleteMovie(@Param('id') id: number) {
-        await this.movieService.delete(id)
-        return { success: true }
+        var resultMovie = await this.movieService.delete(id)
+        return { result: "ok" }
     }
 }
