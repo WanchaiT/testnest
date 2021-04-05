@@ -1,4 +1,4 @@
-import { Injectable, Module } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Module } from '@nestjs/common';
 import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
 import { Connection, DeleteResult, Repository } from 'typeorm';
 import { Movie } from './movie.entity';
@@ -19,7 +19,7 @@ export class MovieService {
     if (movie != null) {
       return movie
     } else {
-      return null
+      throw new HttpException(`No content id ${id} database`, HttpStatus.NOT_FOUND);
     }
   }
 
@@ -28,7 +28,7 @@ export class MovieService {
     if (movie != null) {
       return movie
     } else {
-      return null
+      throw new HttpException(`No content name "${name}" database`, HttpStatus.NOT_FOUND);
     }
   }
 
@@ -37,6 +37,11 @@ export class MovieService {
   }
 
   async delete(id: number): Promise<DeleteResult> {
-    return await this.movieRepository.delete({ id: id });
+    var movie = await this.findOneById(id)
+    if (movie == null) {
+      throw new HttpException(`No content id ${id} database`, HttpStatus.NOT_FOUND);
+    } else {
+      return await this.movieRepository.delete({ id: id });
+    }
   }
 }

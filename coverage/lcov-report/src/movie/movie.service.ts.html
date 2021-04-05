@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.68% </span>
+                <span class="strong">63.64% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/19</span>
+                <span class='fraction'>14/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>2/6</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.59% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/17</span>
+                <span class='fraction'>12/20</span>
             </div>
         
             
@@ -99,8 +99,11 @@
 <a name='L40'></a><a href='#L40'>40</a>
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -109,7 +112,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -117,18 +120,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -136,13 +130,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Injectable, Module } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { HttpException, HttpStatus, Injectable, Module } from '@nestjs/common';
 import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
 import { Connection, DeleteResult, Repository } from 'typeorm';
 import { Movie } from './movie.entity';
@@ -163,16 +170,16 @@ export class MovieService {
     <span class="missing-if-branch" title="else path not taken" >E</span>if (movie != null) {
       return movie
     } else {
-<span class="cstat-no" title="statement not covered" >      return null</span>
+<span class="cstat-no" title="statement not covered" >      throw new HttpException(`No content id ${id} database`, HttpStatus.NOT_FOUND);</span>
     }
   }
 &nbsp;
-  async findOneByName(name: string): Promise&lt;Movie&gt; {
-    var movie = await this.movieRepository.findOne({ name: name });
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (movie != null) {
-      return movie
+<span class="fstat-no" title="function not covered" >  async </span>findOneByName(name: string): Promise&lt;Movie&gt; {
+    var movie = <span class="cstat-no" title="statement not covered" >await this.movieRepository.findOne({ name: name });</span>
+<span class="cstat-no" title="statement not covered" >    if (movie != null) {</span>
+<span class="cstat-no" title="statement not covered" >      return movie</span>
     } else {
-<span class="cstat-no" title="statement not covered" >      return null</span>
+<span class="cstat-no" title="statement not covered" >      throw new HttpException(`No content name "${name}" database`, HttpStatus.NOT_FOUND);</span>
     }
   }
 &nbsp;
@@ -180,8 +187,13 @@ export class MovieService {
 <span class="cstat-no" title="statement not covered" >    return await this.movieRepository.find();</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  async </span>delete(id: number): Promise&lt;DeleteResult&gt; {
-<span class="cstat-no" title="statement not covered" >    return await this.movieRepository.delete({ id: id });</span>
+  async delete(id: number): Promise&lt;DeleteResult&gt; {
+    var movie = await this.findOneById(id)
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (movie == null) {
+<span class="cstat-no" title="statement not covered" >      throw new HttpException(`No content id ${id} database`, HttpStatus.NOT_FOUND);</span>
+    } else {
+      return await this.movieRepository.delete({ id: id });
+    }
   }
 }</pre></td></tr></table></pre>
 
@@ -190,7 +202,7 @@ export class MovieService {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Mar 29 2021 18:18:48 GMT+0700 (Indochina Time)
+                at Mon Apr 05 2021 15:07:12 GMT+0700 (Indochina Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
