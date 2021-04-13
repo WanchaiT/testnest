@@ -9,6 +9,8 @@ import { MovieController } from './movie/movie.controller';
 import { Movie } from './movie/movie.entity';
 import { MovieModule } from './movie/movie.module';
 import { MovieService } from './movie/movie.service';
+import { TestExceptionController } from './test-exception/test-exception.controller';
+import { TestExceptionModule } from './test-exception/test-exception.module';
 
 @Module({
   imports: [
@@ -19,10 +21,11 @@ import { MovieService } from './movie/movie.service';
       keepConnectionAlive: true,
       synchronize: process.env.NODE_ENV != 'production',
     }),
-    MovieModule, 
+    MovieModule,
+    TestExceptionModule, 
 
   ],
-  controllers: [AppController],
+  controllers: [AppController, TestExceptionController],
   providers: [AppService],
 })
 
